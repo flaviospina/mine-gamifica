@@ -1,0 +1,8 @@
+target/
+saves/
+*.png
+!docs/*.png
+.idea/
+*.iml
+.vscode/
+.lwjgl/
