@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terralume</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101018; overflow: hidden; }
+  canvas { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; display: block; }
+  #hud { cursor: default; image-rendering: pixelated; }
+  #erro { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px;
+          color: #fff; font: 18px/1.5 system-ui, sans-serif; text-align: center; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="hud"></canvas>
+<div id="erro"></div>
+<script type="module" src="js/game.js"></script>
+<noscript>Terralume precisa de JavaScript.</noscript>
+</body>
+</html>

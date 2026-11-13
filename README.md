@@ -1,6 +1,10 @@
 # Terralume
 
-Jogo voxel sandbox em primeira pessoa, escrito do zero em **Java 17 + LWJGL 3 (OpenGL 3.3)**.
+Jogo voxel sandbox em primeira pessoa, escrito do zero, em duas versões com as mesmas regras:
+
+- **Web** (`web/`): JavaScript + WebGL 2, roda direto no navegador, sem instalar nada.
+- **Desktop**: Java 17 + LWJGL 3 (OpenGL 3.3).
+
 É um jogo **original do gênero** popularizado pelo Minecraft: usa as mesmas ideias de mecânica
 (mundo de blocos procedural, minerar, construir, montar itens, sobreviver), mas com nome, texturas,
 criaturas e visual próprios — toda a arte é gerada por código, não há nenhum arquivo de imagem ou som.
@@ -8,7 +12,33 @@ criaturas e visual próprios — toda a arte é gerada por código, não há nen
 ![Biomas](docs/captura-biomas.png)
 ![Noite com tochas](docs/captura-noite.png)
 
-## Como jogar
+## Versão web (navegador)
+
+A pasta `web/` contém só arquivos estáticos (`index.html` + `js/`), sem etapa de compilação.
+Funciona em qualquer hospedagem comum (HostGator, etc.): basta enviar a pasta.
+
+**Publicar na HostGator (cPanel):**
+
+1. cPanel → **Gerenciador de Arquivos** → `public_html` → crie a pasta `terralume`.
+2. Envie para ela o `index.html` e a pasta `js/` (ou envie um `.zip` com os dois e use **Extrair**).
+3. Abra `https://seudominio.com.br/terralume/`.
+
+**Testar no seu computador:** os módulos JavaScript não carregam por `file://`; sirva a pasta por HTTP:
+
+```bash
+cd web && python3 -m http.server 8000
+```
+
+e abra `http://localhost:8000/`.
+
+Controles da versão web: **WASD** mover, **Espaço** pular/nadar, **Shift** correr, **C** agachar/descer,
+botão esquerdo minerar/atacar, botão direito colocar/usar/comer, **E** inventário, **1–9**/rolagem barra,
+**Q** soltar, **G** criativo, **F** voar, **H** HUD, **P** informações, **Esc** pausa.
+O mundo é salvo no navegador de cada jogador (IndexedDB + localStorage); "Novo mundo" na pausa apaga e recomeça.
+Parâmetros opcionais na URL: `?seed=123`, `?dist=6`, `?creative`.
+Requer navegador de computador com WebGL 2, teclado e mouse (não há controles de toque).
+
+## Versão desktop (Java)
 
 Requisitos: JDK 17+ e Maven (placa de vídeo com OpenGL 3.3).
 
@@ -65,6 +95,9 @@ picareta de madeira → pedra → **fornalha** (8 pedregulhos) → funda ferro. 
 outras dimensões, portas/escadas/meios-blocos, baús, armaduras e modelo da mão em primeira pessoa.
 
 ## Código
+
+A versão web (`web/js/`) espelha a versão Java módulo a módulo (`game`, `world`, `worldgen`, `mesher`,
+`entity`, `blocks`, `atlas`, `ui`, `gfx`), com a geração de chunks em Web Workers (`genworker`).
 
 `src/main/java/terralume/`
 
